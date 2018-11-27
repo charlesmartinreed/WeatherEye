@@ -11,6 +11,7 @@
 		8C6109AB21ADFE8A00FFB62C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C6109AA21ADFE8A00FFB62C /* Assets.xcassets */; };
 		8C6109AE21ADFE8A00FFB62C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C6109AC21ADFE8A00FFB62C /* MainMenu.xib */; };
 		8C6109B721AE07DE00FFB62C /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6109B621AE07DE00FFB62C /* StatusMenuController.swift */; };
+		8C6109B921AE0D5100FFB62C /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6109B821AE0D5100FFB62C /* WeatherAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		8C6109AF21ADFE8A00FFB62C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C6109B021ADFE8A00FFB62C /* WeatherEye.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherEye.entitlements; sourceTree = "<group>"; };
 		8C6109B621AE07DE00FFB62C /* StatusMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
+		8C6109B821AE0D5100FFB62C /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			children = (
 				8C6109A821ADFE8600FFB62C /* AppDelegate.swift */,
 				8C6109B621AE07DE00FFB62C /* StatusMenuController.swift */,
+				8C6109B821AE0D5100FFB62C /* WeatherAPI.swift */,
 				8C6109AA21ADFE8A00FFB62C /* Assets.xcassets */,
 				8C6109AC21ADFE8A00FFB62C /* MainMenu.xib */,
 				8C6109AF21ADFE8A00FFB62C /* Info.plist */,
@@ -133,6 +136,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C6109B921AE0D5100FFB62C /* WeatherAPI.swift in Sources */,
 				8C6109B721AE07DE00FFB62C /* StatusMenuController.swift in Sources */,
 				8C6109A921ADFE8600FFB62C /* AppDelegate.swift in Sources */,
 			);

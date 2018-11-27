@@ -11,17 +11,30 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    @IBOutlet weak var window: NSWindow!
+    //MARK:- @IBOutlets
+    //window outlet removed since this is a menu bar app
+    @IBOutlet weak var statusMenu: NSMenu!
+    
+    //adjusts to the width of its contents
+    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
-
+    //MARK:- App Delegate methods
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        
+        //Intiaization for menu
+        statusItem.button?.title = "WeatherEye"
+        statusItem.menu = statusMenu
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
 
-
+    //MARK:- @IBActions
+    @IBAction func quitClicked(_ sender: NSMenuItem) {
+        //the app should terminate itself
+        NSApplication.shared.terminate(self)
+    }
+    
 }
 

@@ -13,40 +13,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     //MARK:- @IBOutlets
     //window outlet removed since this is a menu bar app
-    @IBOutlet weak var statusMenu: NSMenu!
+    //@IBOutlet weak var statusMenu: NSMenu! - refactored into StatusMenuController
     
     //adjusts to the width of its contents
-    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+//    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength) - refactored into StatusMenuController
 
     //MARK:- App Delegate methods
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
-        //Intiaization for menu
-        //statusItem.button?.title = "WeatherEye"
-        //statusItem.menu = statusMenu
-        
-        //Init for App Icon
-        guard let icon = NSImage(named: "statusIcon") else {
-            //just dicking around here, this code should never run
-            statusItem.button?.title = "WeatherEye"
-            statusItem.menu = statusMenu
-            return
-        }
-        
-        icon.isTemplate = true // for dark mode -  produces only black or clear images
-        statusItem.button?.image = icon
-        statusItem.menu = statusMenu
+        //refactored into StatusMenuController
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
 
-    //MARK:- @IBActions
-    @IBAction func quitClicked(_ sender: NSMenuItem) {
-        //the app should terminate itself
-        NSApplication.shared.terminate(self)
-    }
+    
     
 }
 

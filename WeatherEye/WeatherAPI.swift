@@ -9,10 +9,16 @@
 import Foundation
 
 //MARK:- Structs
-struct Weather {
+struct Weather: CustomStringConvertible {
+    
     var city: String
     var currentTemp: Float
-    var currenConditions: String
+    var currentConditions: String
+    
+    var description: String {
+        return "\(city): \(currentTemp)F and \(currentConditions)"
+    }
+    
 }
 
 class WeatherAPI {
@@ -20,12 +26,14 @@ class WeatherAPI {
     let baseURL = "http://api.openweathermap.org/data/2.5/weather"
     
     //MARK:- GET weather data
-    func fetchWeather(_ query: String) {
+    //expect a function that takes a Weather obj, @escaping because the function calls out of fetchWeather
+    func fetchWeather(_ query: String, success: @escaping (Weather) -> Void) {
         let session = URLSession.shared //grab the singleton object
         
         // url-escape the query string we're passed during method call
         let escapedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         let url = URL(string: "\(baseURL)?APPID=\(apiKey)&units=imperial&q=\(escapedQuery!)")
+        
         let task = session.dataTask(with: url!) { (data, response, err) in
             //check for an error
             if let error = err {
@@ -40,7 +48,8 @@ class WeatherAPI {
 //                        NSLog(dataString)
 //                    }
                     if let weather = self.weatherFromJSONData(data!) {
-                        NSLog("\(weather)")
+                        //NSLog("\(weather)")
+                        success(weather) //callback function
                     }
                 case 401: //unauthorized
                     NSLog("weather api returned an 'unauthorized response', check that your API key was properly set")
@@ -71,7 +80,7 @@ class WeatherAPI {
         var weatherDict = weatherList[0] //grab the first result from that created dict
         
         //for whatever reason, Xcode and Swift can't cast to Float from NSNumber directly, so we need to cast it as a NSNumber and then convert floatValue
-        let weather = Weather(city: json["name"] as! String, currentTemp: (mainDict["temp"] as? NSNumber)?.floatValue ?? 0, currenConditions: weatherDict["main"] as! String)
+        let weather = Weather(city: json["name"] as! String, currentTemp: (mainDict["temp"] as? NSNumber)?.floatValue ?? 0, currentConditions: weatherDict["main"] as! String)
         
         return weather
     }

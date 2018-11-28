@@ -23,6 +23,7 @@
 		8C6109B021ADFE8A00FFB62C /* WeatherEye.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherEye.entitlements; sourceTree = "<group>"; };
 		8C6109B621AE07DE00FFB62C /* StatusMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
 		8C6109B821AE0D5100FFB62C /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
+		8C6109BA21AE254B00FFB62C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +40,7 @@
 		8C61099C21ADFE8600FFB62C = {
 			isa = PBXGroup;
 			children = (
+				8C6109BA21AE254B00FFB62C /* README.md */,
 				8C6109A721ADFE8600FFB62C /* WeatherEye */,
 				8C6109A621ADFE8600FFB62C /* Products */,
 			);

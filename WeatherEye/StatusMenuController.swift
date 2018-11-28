@@ -38,7 +38,9 @@ class StatusMenuController: NSObject {
     
     //MARK:- Class methods
     func updateWeather() {
-        weatherAPI.fetchWeather("Seattle")
+        weatherAPI.fetchWeather("Seattle") { (weather) in
+            NSLog(weather.description)
+        }
     }
     
     //MARK:- @IBActions

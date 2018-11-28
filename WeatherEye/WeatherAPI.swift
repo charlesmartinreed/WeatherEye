@@ -14,6 +14,7 @@ struct Weather: CustomStringConvertible {
     var city: String
     var currentTemp: Float
     var currentConditions: String
+    var icon: String
     
     var description: String {
         return "\(city): \(currentTemp)F and \(currentConditions)"
@@ -80,7 +81,10 @@ class WeatherAPI {
         var weatherDict = weatherList[0] //grab the first result from that created dict
         
         //for whatever reason, Xcode and Swift can't cast to Float from NSNumber directly, so we need to cast it as a NSNumber and then convert floatValue
-        let weather = Weather(city: json["name"] as! String, currentTemp: (mainDict["temp"] as? NSNumber)?.floatValue ?? 0, currentConditions: weatherDict["main"] as! String)
+        let weather = Weather(city: json["name"] as! String,
+                              currentTemp: (mainDict["temp"] as? NSNumber)?.floatValue ?? 0,
+                              currentConditions: weatherDict["main"] as! String,
+                              icon: weatherDict["icon"] as! String)
         
         return weather
     }

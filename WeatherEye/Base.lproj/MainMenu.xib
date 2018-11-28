@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -10,12 +11,13 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="WeatherEye" customModuleProvider="target"/>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <customObject id="hkw-EF-rlY" customClass="StatusMenuController" customModule="WeatherEye" customModuleProvider="target">
             <connections>
                 <outlet property="statusMenu" destination="QK8-C0-ZMq" id="Z8C-YV-CtU"/>
+                <outlet property="weatherView" destination="btH-q5-dT2" id="3ei-ZY-Jaf"/>
             </connections>
         </customObject>
         <menu id="QK8-C0-ZMq">
@@ -26,6 +28,10 @@
                         <action selector="updateClicked:" target="hkw-EF-rlY" id="Uzf-SB-fgu"/>
                     </connections>
                 </menuItem>
+                <menuItem isSeparatorItem="YES" id="WK9-Cy-1DZ"/>
+                <menuItem title="Weather" id="gFk-sf-sME" userLabel="Weather">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
                 <menuItem isSeparatorItem="YES" id="eUY-Ay-gKX"/>
                 <menuItem title="Quit" id="k7R-7o-n5J">
                     <modifierMask key="keyEquivalentModifierMask"/>
@@ -34,6 +40,42 @@
                     </connections>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="32" y="51"/>
         </menu>
+        <customView id="btH-q5-dT2" customClass="WeatherView" customModule="WeatherEye" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="265" height="90"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hIv-DT-6qH">
+                    <rect key="frame" x="69" y="48" width="178" height="25"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="City" id="VjU-CD-9tz">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EZa-2f-0cS">
+                    <rect key="frame" x="69" y="20" width="178" height="17"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Temperature and Conditions" id="IMu-9W-4zu">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3pO-X9-Vsi">
+                    <rect key="frame" x="0.0" y="23" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="e81-d4-e3A"/>
+                </imageView>
+            </subviews>
+            <connections>
+                <outlet property="cityTextField" destination="hIv-DT-6qH" id="ptb-Wd-6iM"/>
+                <outlet property="currentConditionsTextField" destination="EZa-2f-0cS" id="R4T-3O-eXb"/>
+                <outlet property="imageView" destination="3pO-X9-Vsi" id="ZAD-Ce-yDO"/>
+            </connections>
+            <point key="canvasLocation" x="69.5" y="195"/>
+        </customView>
     </objects>
 </document>

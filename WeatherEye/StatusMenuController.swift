@@ -11,6 +11,10 @@ import Cocoa
 class StatusMenuController: NSObject {
     
     @IBOutlet weak var statusMenu: NSMenu!
+    @IBOutlet weak var weatherView: WeatherView!
+    
+    //class var for the WeatherView pane
+    var weatherMenuItem: NSMenuItem!
     
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     let weatherAPI = WeatherAPI() //instantiate WeatherAPI
@@ -33,13 +37,19 @@ class StatusMenuController: NSObject {
         statusItem.menu = statusMenu
         
         //update weather on load
+        weatherMenuItem = statusMenu.item(withTitle: "Weather")
+        weatherMenuItem.view = weatherView
         updateWeather()
     }
     
     //MARK:- Class methods
     func updateWeather() {
         weatherAPI.fetchWeather("Seattle") { (weather) in
-            NSLog(weather.description)
+            //add the weather info into the menu item we created in xib
+//            if let weatherMenuItem = self.statusMenu.item(withTitle: "Weather") {
+//                weatherMenuItem.title = weather.description
+//            }
+            self.weatherView.update(weather)
         }
     }
     

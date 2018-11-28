@@ -7,22 +7,25 @@
 //
 
 import Cocoa
+let defaultCity = "Dallas" //sorta taking the easy way out here by using global var instead of something like user defaults
 
-class StatusMenuController: NSObject {
+class StatusMenuCon
+troller: NSObject, PreferencesWindowDelegate {
     
     @IBOutlet weak var statusMenu: NSMenu!
     @IBOutlet weak var weatherView: WeatherView!
     
     //class var for the WeatherView pane
     var weatherMenuItem: NSMenuItem!
+    var preferencesWindow: PreferencesWindow!
     
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     let weatherAPI = WeatherAPI() //instantiate WeatherAPI
     
     override func awakeFromNib() {
-        //Intiaization for menu
-        //statusItem.button?.title = "WeatherEye"
-        //statusItem.menu = statusMenu
+        //set the delegate
+        preferencesWindow = PreferencesWindow()
+        preferencesWindow.delegate = self
         
         //Init for App Icon
         guard let icon = NSImage(named: "statusIcon") else {
@@ -36,15 +39,26 @@ class StatusMenuController: NSObject {
         statusItem.button?.image = icon
         statusItem.menu = statusMenu
         
+        //initialize the PreferencesWindow
+        preferencesWindow = PreferencesWindow()
+        
         //update weather on load
         weatherMenuItem = statusMenu.item(withTitle: "Weather")
         weatherMenuItem.view = weatherView
+        updateWeather()
+        
+    }
+    
+    //MARK:- Delegate methods
+    func preferencesDidUpdate() {
         updateWeather()
     }
     
     //MARK:- Class methods
     func updateWeather() {
-        weatherAPI.fetchWeather("Seattle") { (weather) in
+        let defaults = UserDefaults.standard
+        let city = defaults.string(forKey: "city") ?? defaultCity
+        weatherAPI.fetchWeather(city) { (weather) in
             //add the weather info into the menu item we created in xib
 //            if let weatherMenuItem = self.statusMenu.item(withTitle: "Weather") {
 //                weatherMenuItem.title = weather.description
@@ -59,8 +73,12 @@ class StatusMenuController: NSObject {
     }
     
     @IBAction func quitClicked(_ sender: NSMenuItem) {
-        //the app should terminate itself
         NSApplication.shared.terminate(self)
     }
+    
+    @IBAction func preferencesClicked(_ sender: NSMenuItem) {
+        preferencesWindow.showWindow(nil)
+    }
+    
 
 }

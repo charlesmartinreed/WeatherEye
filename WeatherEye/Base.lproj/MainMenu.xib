@@ -33,6 +33,13 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="eUY-Ay-gKX"/>
+                <menuItem title="Preferences" id="Wgt-3t-m35">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="preferencesClicked:" target="hkw-EF-rlY" id="cvb-au-EQN"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="lwC-hF-EN7"/>
                 <menuItem title="Quit" id="k7R-7o-n5J">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
@@ -40,7 +47,7 @@
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="32" y="51"/>
+            <point key="canvasLocation" x="-111" y="58"/>
         </menu>
         <customView id="btH-q5-dT2" customClass="WeatherView" customModule="WeatherEye" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="265" height="90"/>

@@ -21,6 +21,7 @@ class WeatherView: NSView {
             self.cityTextField.stringValue = weather.city
             self.currentConditionsTextField.stringValue = "\(weather.currentTemp)F and \(weather.currentConditions)"
             //self.imageView.image = NSImage(named: "\(weather.icon)")
+            self.imageView.image = NSImage(named: weather.icon)
         }
     }
     

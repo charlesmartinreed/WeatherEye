@@ -8,10 +8,18 @@
 
 import Foundation
 
+//MARK:- Structs
+struct Weather {
+    var city: String
+    var currentTemp: Float
+    var currenConditions: String
+}
+
 class WeatherAPI {
     let apiKey = "99e5cefe299c0dbc3d635bf2d124364f"
     let baseURL = "http://api.openweathermap.org/data/2.5/weather"
     
+    //MARK:- GET weather data
     func fetchWeather(_ query: String) {
         let session = URLSession.shared //grab the singleton object
         
@@ -28,8 +36,11 @@ class WeatherAPI {
             if let httpResponse = response as? HTTPURLResponse {
                 switch httpResponse.statusCode {
                 case 200: //OK
-                    if let dataString = String(data: data!, encoding: .utf8) {
-                        NSLog(dataString)
+//                    if let dataString = String(data: data!, encoding: .utf8) {
+//                        NSLog(dataString)
+//                    }
+                    if let weather = self.weatherFromJSONData(data!) {
+                        NSLog("\(weather)")
                     }
                 case 401: //unauthorized
                     NSLog("weather api returned an 'unauthorized response', check that your API key was properly set")
@@ -38,7 +49,31 @@ class WeatherAPI {
                 }
             }
         }
-        
+        print("This is the url: \(url!)")
         task.resume()
     }
+    
+    //MARK:- PARSE weather data
+    func weatherFromJSONData(_ data: Data) -> Weather? {
+        typealias JSONDict = [String:AnyObject]
+        let json: JSONDict
+        
+        do {
+            json = try JSONSerialization.jsonObject(with: data, options: []) as! JSONDict
+        } catch {
+            NSLog("JSON parsing failed: \(error)") //JSONSerialization can throw error, that's what we're referencing here
+            return nil
+        }
+        
+        //assigning the pulled data, if available
+        var mainDict = json["main"] as! JSONDict //grab a dict, this has our temps
+        var weatherList = json["weather"] as! [JSONDict] //make a weather list dict
+        var weatherDict = weatherList[0] //grab the first result from that created dict
+        
+        //for whatever reason, Xcode and Swift can't cast to Float from NSNumber directly, so we need to cast it as a NSNumber and then convert floatValue
+        let weather = Weather(city: json["name"] as! String, currentTemp: (mainDict["temp"] as? NSNumber)?.floatValue ?? 0, currenConditions: weatherDict["main"] as! String)
+        
+        return weather
+    }
+    
 }
